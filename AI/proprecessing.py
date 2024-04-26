@@ -1,5 +1,6 @@
 from PyPDF2 import PdfReader
 import pickle
+import aspose.words as aw
 
 class Processing:
     class Preprocessing:
@@ -66,3 +67,24 @@ class Processing:
             cv_words_after_translate = self.handle_text_when_length_sup_512(cv_words_after_translate)
             
             return cv_words_after_translate
+        def define_type_of_file_and_make_action(self, file_path):
+            """This method defines the type of the input file and runs the READ_PDF method if the file is a PDF.
+            Otherwise, it will convert it into pdf. The return value will be None if the type of the file is not PDF or Word format.
+            
+            :param file_path: The CV file's path will be stored in this variable.
+            :return: The extracted text from the file if it's successfully processed, or None if the file type is unsupported or processing fails.
+            """
+            try:
+                if file_path.endswith(".pdf"):
+                    return self.READ_PDF(file_path)
+                elif file_path.endswith(".docx"):
+                    doc = aw.Document(file_path)
+                    PATH = "output.pdf"
+                    doc.save(PATH)
+                    return self.READ_PDF(PATH)
+                else:
+                    return None
+            except Exception as e:
+                # Add appropriate error handling/logging here
+                print(f"Error occurred while processing file: {e}")
+                return None
