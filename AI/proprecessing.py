@@ -1,3 +1,4 @@
+from PyPDF2 import PdfReader
 import pickle
 
 class Processing:
@@ -43,3 +44,25 @@ class Processing:
                                 CV_WORDS_AFTER_TRANSLATE_WORDS_TO_ENGLISH.append(translated_segment)
                                 break
                 return CV_WORDS_AFTER_TRANSLATE_WORDS_TO_ENGLISH
+        def pdf_read(self, file_path):
+            """Reads all the words from a PDF file and translates them to English.
+
+            :param file_path: The path of the PDF file to read.
+
+            :return: A list containing words from the PDF after translation to English.
+            """
+            # Initialize variables
+            cv_words_after_translate = []
+
+            # Read PDF file
+            with open(file_path, 'rb') as file:
+                pdf_reader = PdfReader(file)
+                # Extract text from each page and append to the list
+                for page in pdf_reader.pages:
+                    cv_words_before_translate = page.extract_text()
+                    cv_words_after_translate.append(cv_words_before_translate)
+
+            # Translate paragraphs into English
+            cv_words_after_translate = self.handle_text_when_length_sup_512(cv_words_after_translate)
+            
+            return cv_words_after_translate
