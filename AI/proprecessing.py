@@ -7,7 +7,9 @@ class Processing:
             pass
         
         def translate_from_french_to_english(self, CV_WORDS):
-           with open('Translation_From_French_words_to_English.pkl', 'rb') as file:
+            """This method will call pretrained model that translate text from frensh to english
+            """
+            with open('Translation_From_French_words_to_English.pkl', 'rb') as file:
               MODEL_AI = pickle.load(file)
               TEXT = MODEL_AI(CV_WORDS)
               return TEXT[0]["translation_text"]
