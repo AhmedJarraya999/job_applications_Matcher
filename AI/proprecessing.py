@@ -1,17 +1,18 @@
 from PyPDF2 import PdfReader
 import pickle
 import aspose.words as aw
+import os
+from spacy.lang.en import English
 
 class Processing:
-    class Preprocessing:
-        def __init__(self):
+        def __init__(self, majors_patterns_path):
             # No preprocessing logic is needed at the moment...
-            pass
+            self.majors_patterns_path = majors_patterns_path
         
         def translate_from_french_to_english(self, cv_words):
             """This method will call pretrained model that translate text from frensh to english
             """
-            with open('Translation_From_French_words_to_English.pkl', 'rb') as file:
+            with open('model_loading/Translation_From_Frensh_words_to_English.pkl', 'rb') as file:
               MODEL_AI = pickle.load(file)
               TEXT = MODEL_AI(cv_words)
               return TEXT[0]["translation_text"]
@@ -45,6 +46,33 @@ class Processing:
                                 CV_WORDS_AFTER_TRANSLATE_WORDS_TO_ENGLISH.append(translated_segment)
                                 break
                 return CV_WORDS_AFTER_TRANSLATE_WORDS_TO_ENGLISH
+        def match_majors_by_spacy(self,job):
+            """
+             Match majors mentioned in the text using spaCy's entity ruler.
+
+             Parameters:
+              - Resume (str): The text to process.
+
+            Returns:
+            - acceptable_majors (list): A list of acceptable majors found in the text.
+            """
+
+            nlp = English()
+            # Add the pattern to the matcher
+            patterns_path = "patterns/majors.jsonl"
+            ruler = nlp.add_pipe("entity_ruler")
+            ruler.from_disk(patterns_path)
+            # Process some text
+            doc1 = nlp(job)
+            acceptable_majors = []
+            for ent in doc1.ents:
+                labels_parts = ent.label_.split('|')
+                if labels_parts[0] == 'MAJOR':
+                    if labels_parts[2].replace('-', ' ') not in acceptable_majors:
+                        acceptable_majors.append(labels_parts[2].replace('-', ' '))
+                    if labels_parts[2].replace('-', ' ') not in acceptable_majors:
+                        acceptable_majors.append(labels_parts[2].replace('-', ' '))
+            return acceptable_majors
         def pdf_read(self, file_path):
             """Reads all the words from a PDF file and translates them to English.
 
@@ -76,15 +104,16 @@ class Processing:
             """
             try:
                 if file_path.endswith(".pdf"):
-                    return self.READ_PDF(file_path)
+                    return self.pdf_read(file_path)
                 elif file_path.endswith(".docx"):
                     doc = aw.Document(file_path)
                     PATH = "output.pdf"
                     doc.save(PATH)
-                    return self.READ_PDF(PATH)
+                    return self.pdf_read(PATH)
                 else:
                     return None
             except Exception as e:
                 # Add appropriate error handling/logging here
                 print(f"Error occurred while processing file: {e}")
-                return None
+                return None          
+    
