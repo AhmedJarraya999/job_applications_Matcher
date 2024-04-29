@@ -76,6 +76,37 @@ class Processing:
                     if labels_parts[2].replace('-', ' ') not in acceptable_majors:
                         acceptable_majors.append(labels_parts[2].replace('-', ' '))
             return acceptable_majors
+        def match_skills_by_spacy(self, job):
+            """
+        Extracts skills mentioned in a job description/parsed_resume using spaCy entity recognition.
+
+        Parameters:
+            job (str)/parsed resume(as string): The  skills will be extracted from here.
+
+        Returns:
+            list: A list of unique skills mentioned in the job description/parsed resume.
+
+        Example:
+            >>> processing_instance = Processing()
+            >>> job_description = "We are looking for candidates with proficiency in Python and SQL."
+            >>> processing_instance.match_skills_by_spacy(job_description)
+            ['Python', 'SQL']
+        """
+            nlp = English()
+            patterns_path = "patterns/skills.jsonl"
+            ruler = nlp.add_pipe("entity_ruler")
+            ruler.from_disk(patterns_path)
+            # Process some text
+            doc1 = nlp(job)
+            job_skills = []
+            for ent in doc1.ents:
+                labels_parts = ent.label_.split('|')
+                if labels_parts[0] == 'SKILL':
+                    #print((ent.text, ent.label_))
+                    if labels_parts[1].replace('-', ' ') not in job_skills:
+                        job_skills.append(labels_parts[1].replace('-', ' '))
+            return job_skills
+        
         def match_degrees_by_spacy(self, job):
             """
                     Extracts degree levels mentioned in a parsed resume/job description using spaCy entity recognition.
