@@ -5,9 +5,10 @@ import os
 from spacy.lang.en import English
 
 class Processing:
-        def __init__(self, majors_patterns_path):
+        def __init__(self, majors_patterns_path,degrees_patterns_path):
             # No preprocessing logic is needed at the moment...
             self.majors_patterns_path = majors_patterns_path
+            self.degrees_patterns_path= degrees_patterns_path
         
         def translate_from_french_to_english(self, cv_words):
             """This method will call pretrained model that translate text from frensh to english
