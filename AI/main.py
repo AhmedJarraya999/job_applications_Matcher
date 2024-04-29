@@ -26,7 +26,8 @@
 from proprecessing import Processing
 #CLASS
 majors_patterns_path="/patterns/majors.jsonl"
-EXTRACT_DATA_FROM_CV =Processing(majors_patterns_path)
+degrees_patterns_path="/patterns/degrees.jsonl"
+EXTRACT_DATA_FROM_CV =Processing(majors_patterns_path,degrees_patterns_path)
 #preprocessor = Processing.Preprocessing(majors_patterns_path)
 CV_WORDS = EXTRACT_DATA_FROM_CV.define_type_of_file_and_make_action("Data/1.pdf")
 print(type(CV_WORDS))
@@ -39,6 +40,9 @@ cv_translated_as_a_string = ' '.join(CV_WORDS)
 
 
 majors_list_from_a_resume=EXTRACT_DATA_FROM_CV.match_majors_by_spacy(cv_translated_as_a_string)
+print(majors_list_from_a_resume)
+
+majors_list_from_a_resume=EXTRACT_DATA_FROM_CV.match_degrees_by_spacy(cv_translated_as_a_string)
 print(majors_list_from_a_resume)
 
 #print(CV_WORDS2)

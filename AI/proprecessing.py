@@ -47,6 +47,7 @@ class Processing:
                                 CV_WORDS_AFTER_TRANSLATE_WORDS_TO_ENGLISH.append(translated_segment)
                                 break
                 return CV_WORDS_AFTER_TRANSLATE_WORDS_TO_ENGLISH
+        
         def match_majors_by_spacy(self,job):
             """
              Match majors mentioned in the text using spaCy's entity ruler.
@@ -74,6 +75,38 @@ class Processing:
                     if labels_parts[2].replace('-', ' ') not in acceptable_majors:
                         acceptable_majors.append(labels_parts[2].replace('-', ' '))
             return acceptable_majors
+        def match_degrees_by_spacy(self, job):
+            """
+                    Extracts degree levels mentioned in a parsed resume/job description using spaCy entity recognition.
+
+                    Parameters:
+                        job (str): The parsedd resume/job description  text from which degree levels will be extracted.
+
+                    Returns:
+                        list: A list of unique degree levels mentioned in the job description.
+
+                    Example:
+                        >>> processing_instance = Processing()
+                        >>> job_description = "We are looking for candidates with a Bachelor's degree in Computer Science."
+                        >>> processing_instance.match_degrees_by_spacy(job_description)
+                        ['BS-LEVEL']
+            """        
+            nlp = English()
+            # Add the pattern to the matcher
+            patterns_path = "patterns/degrees.jsonl"
+            ruler = nlp.add_pipe("entity_ruler")
+            ruler.from_disk(patterns_path)
+            # Process some text
+            doc1 = nlp(job)
+            degree_levels = []
+            for ent in doc1.ents:
+                labels_parts = ent.label_.split('|')
+                if labels_parts[0] == 'DEGREE':
+                   # print((ent.text, ent.label_))
+                    if labels_parts[1] not in degree_levels:
+                        degree_levels.append(labels_parts[1])
+            return degree_levels
+
         def pdf_read(self, file_path):
             """Reads all the words from a PDF file and translates them to English.
 
