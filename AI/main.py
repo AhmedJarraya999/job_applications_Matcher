@@ -43,11 +43,14 @@ cv_translated_as_a_string = ' '.join(CV_WORDS)
 majors_list_from_a_resume=EXTRACT_DATA_FROM_CV.match_majors_by_spacy(cv_translated_as_a_string)
 print(majors_list_from_a_resume)
 
-majors_list_from_a_resume=EXTRACT_DATA_FROM_CV.match_degrees_by_spacy(cv_translated_as_a_string)
-print(majors_list_from_a_resume)
+degrees_list_from_a_resume=EXTRACT_DATA_FROM_CV.match_degrees_by_spacy(cv_translated_as_a_string)
+print(degrees_list_from_a_resume)
 
 skills_list_from_a_resume=EXTRACT_DATA_FROM_CV.match_skills_by_spacy(cv_translated_as_a_string)
 print(skills_list_from_a_resume)
+
+highest_degree=EXTRACT_DATA_FROM_CV.get_minimum_degree(degrees_list_from_a_resume)
+print ("the highest degree of this candidate is", highest_degree )
 
 #print(CV_WORDS2)
 

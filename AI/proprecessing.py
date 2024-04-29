@@ -3,13 +3,15 @@ import pickle
 import aspose.words as aw
 import os
 from spacy.lang.en import English
+from resources import DEGREES_IMPORTANCE
 
 class Processing:
-        def __init__(self, majors_patterns_path,degrees_patterns_path,skills_patterns_path):
+        def __init__(self, majors_patterns_path, degrees_patterns_path, skills_patterns_path):
             # No preprocessing logic is needed at the moment...
-            self.skills_patterns_path=skills_patterns_path
+            self.skills_patterns_path = skills_patterns_path
             self.majors_patterns_path = majors_patterns_path
-            self.degrees_patterns_path= degrees_patterns_path
+            self.degrees_patterns_path = degrees_patterns_path
+            self.degrees_importance = DEGREES_IMPORTANCE
         
         def translate_from_french_to_english(self, cv_words):
             """This method will call pretrained model that translate text from frensh to english
@@ -182,4 +184,21 @@ class Processing:
                 # Add appropriate error handling/logging here
                 print(f"Error occurred while processing file: {e}")
                 return None          
+            
+        def get_minimum_degree(self, degrees):
+         """Get the minimum degree that the candidate has.
+    
+        Parameters:
+        degrees (list): A list of degrees obtained by the candidate.
+        
+        Returns:
+        str: The minimum degree obtained by the candidate.
+
+        Note:
+        The 'degrees' parameter should be a list of strings representing the degrees.
+        The 'degrees_importance' attribute should be a dictionary mapping degrees to their importance levels.
+        Example: DEGREES_IMPORTANCE = {'high school': 0, 'associate': 1, 'BS-LEVEL': 2, 'MS-LEVEL': 3, 'PHD-LEVEL': 4}
+    """
+         d = {degree: self.degrees_importance[degree] for degree in degrees}
+         return min(d, key=d.get)
     
