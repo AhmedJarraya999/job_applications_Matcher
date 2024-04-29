@@ -5,8 +5,9 @@ import os
 from spacy.lang.en import English
 
 class Processing:
-        def __init__(self, majors_patterns_path,degrees_patterns_path):
+        def __init__(self, majors_patterns_path,degrees_patterns_path,skills_patterns_path):
             # No preprocessing logic is needed at the moment...
+            self.skills_patterns_path=skills_patterns_path
             self.majors_patterns_path = majors_patterns_path
             self.degrees_patterns_path= degrees_patterns_path
         
