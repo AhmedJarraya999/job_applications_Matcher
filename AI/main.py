@@ -52,6 +52,10 @@ print(skills_list_from_a_resume)
 highest_degree=EXTRACT_DATA_FROM_CV.get_minimum_degree(degrees_list_from_a_resume)
 print ("the highest degree of this candidate is", highest_degree )
 
+
+extract_entities_from_resume=EXTRACT_DATA_FROM_CV.extract_entities_from_resume(CV_WORDS)
+print(extract_entities_from_resume)
+
 #print(CV_WORDS2)
 
 #ahmed=["what is your name"]

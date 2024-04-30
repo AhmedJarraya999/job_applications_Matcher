@@ -3,6 +3,7 @@ import pickle
 import aspose.words as aw
 import os
 from spacy.lang.en import English
+import pandas as pd
 from resources import DEGREES_IMPORTANCE
 
 class Processing:
@@ -201,4 +202,35 @@ class Processing:
     """
          d = {degree: self.degrees_importance[degree] for degree in degrees}
          return min(d, key=d.get)
-    
+        
+        def extract_entities_from_resume(self, resume_list):
+            """
+        Extracts entities such as degrees, majors, and skills from a given resume.
+
+        Args:
+            resume_list (list): A list containing text segments of the resume.
+
+        Returns:
+            pd.DataFrame: A DataFrame containing the extracted entities.
+        """
+            # Convert the resume to a string
+            cv_translated_as_a_string = ' '.join(resume_list)
+            
+            # Create an empty dataframe to store the extracted entities
+            columns = ['Highest degree', 'Degrees', 'Major', 'Skill']
+            extracted_entities_df = pd.DataFrame(columns=columns)
+            
+            # Match degrees, majors, and skills using spaCy
+            degrees = self.match_degrees_by_spacy(cv_translated_as_a_string)
+            majors = self.match_majors_by_spacy(cv_translated_as_a_string)
+            skills = self.match_skills_by_spacy(cv_translated_as_a_string)
+            
+            # Extract highest degree
+            highest_degree = self.get_minimum_degree(degrees) if degrees else ""
+            
+            # Populate the dataframe with extracted entities
+            extracted_entities_df.loc[0] = [highest_degree, ', '.join(degrees), ', '.join(majors), ', '.join(skills)]
+            
+            return extracted_entities_df
+        
+             
