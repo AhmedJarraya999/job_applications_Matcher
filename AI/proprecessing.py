@@ -164,6 +164,7 @@ class Processing:
             cv_words_after_translate = self.handle_text_when_length_sup_512(cv_words_after_translate)
             
             return cv_words_after_translate
+        
         def define_type_of_file_and_make_action(self, file_path):
             """This method defines the type of the input file and runs the READ_PDF method if the file is a PDF.
             Otherwise, it will convert it into pdf. The return value will be None if the type of the file is not PDF or Word format.
@@ -198,14 +199,14 @@ class Processing:
             return JOB_REQUIRMENTS
                 
             
-        def get_minimum_degree(self, degrees):
-         """Get the minimum degree that the candidate has.
+        def get_maximum_degree(self, degrees):
+         """Get the maximum degree that the candidate has.
     
         Parameters:
         degrees (list): A list of degrees obtained by the candidate.
         
         Returns:
-        str: The minimum degree obtained by the candidate.
+        str: The highest degree obtained by the candidate.
 
         Note:
         The 'degrees' parameter should be a list of strings representing the degrees.
@@ -214,6 +215,26 @@ class Processing:
     """
          d = {degree: self.degrees_importance[degree] for degree in degrees}
          return max(d, key=d.get)
+        
+        def get_minimum_degree(self, degrees):
+         """Get the minimum degree required for the  job description
+    
+        Parameters:
+        degrees (list): A list of degrees obtained by the candidate.
+        
+        Returns:
+        str: The minimum degree required for the job description.
+
+        Note:
+        The 'degrees' parameter should be a list of strings representing the degrees.
+        The 'degrees_importance' attribute should be a dictionary mapping degrees to their importance levels.
+        Example: DEGREES_IMPORTANCE = {'high school': 0, 'associate': 1, 'BS-LEVEL': 2, 'MS-LEVEL': 3, 'PHD-LEVEL': 4}
+    """
+         d = {degree: self.degrees_importance[degree] for degree in degrees}
+         return min(d, key=d.get)
+        
+        
+    
         
         def extract_entities_from_resume(self, resume_list):
             """
@@ -238,7 +259,7 @@ class Processing:
             skills = self.match_skills_by_spacy(cv_translated_as_a_string)
             
             # Extract highest degree
-            highest_degree = self.get_minimum_degree(degrees) if degrees else ""
+            highest_degree = self.get_maximum_degree(degrees) if degrees else ""
             
             # Populate the dataframe with extracted entities
             extracted_entities_cv_df.loc[0] = [highest_degree, ', '.join(degrees), ', '.join(majors), ', '.join(skills)]
@@ -261,7 +282,7 @@ class Processing:
         """
              
             # Create an empty dataframe to store the extracted entities
-            columns = ['Highest degree', 'Degrees', 'Major', 'Skill']
+            columns = ['Minimum degree', 'Degrees', 'Major', 'Skill']
             extracted_entities_job_description_df = pd.DataFrame(columns=columns)
             
             # Match degrees, majors, and skills using spaCy
@@ -270,12 +291,26 @@ class Processing:
             skills = self.match_skills_by_spacy(job_description_string)
             
             # Extract highest degree
-            highest_degree = self.get_minimum_degree(degrees) if degrees else ""
+            minimum_degree = self.get_minimum_degree(degrees) if degrees else ""
             
             # Populate the dataframe with extracted entities
-            extracted_entities_job_description_df.loc[0] = [highest_degree, ', '.join(degrees), ', '.join(majors), ', '.join(skills)]
+            extracted_entities_job_description_df.loc[0] = [minimum_degree, ', '.join(degrees), ', '.join(majors), ', '.join(skills)]
            
              # Assuming extracted_entities_df is your dataframe
             extracted_entities_job_description_df.to_csv('extracted_entities_jobdescription.csv', index=False)
             return extracted_entities_job_description_df
-             
+        
+        # @staticmethod
+        # def assign_degree_match(match_scores):
+        #         """calculate a degree matching score"""
+        #         match_score = 0
+        #         if len(match_scores) != 0:
+        #             if max(match_scores) >= 2:
+        #                 match_score = 0.5
+        #             elif (max(match_scores) >= 0) and (max(match_scores) < 2):
+        #                 match_score = 1
+        #         return match_score
+            
+        # def degree_matching(self,degrees_resume, degrees_job):
+        #   """calculate the final degree matching scores between resumes and job description"""
+        #   job_min_degree = self.degrees_importance[jobs['Minimum degree level'][job_index]]

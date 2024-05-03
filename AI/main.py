@@ -31,6 +31,10 @@ degrees_patterns_path="/patterns/degrees.jsonl"
 skills_patterns_path="/patterns/skills.jsonl"
 EXTRACT_DATA_FROM_CV =Processing(majors_patterns_path,degrees_patterns_path,skills_patterns_path)
 #preprocessor = Processing.Preprocessing(majors_patterns_path)
+translated_job_description=EXTRACT_DATA_FROM_CV.translate_line_by_line('DATA/job-requirements2.txt')
+#transformation the job description translated from list to string 
+cv_jobdescription_as_a_string = ' '.join(translated_job_description)
+
 CV_WORDS = EXTRACT_DATA_FROM_CV.define_type_of_file_and_make_action("Data/1.pdf")
 print(type(CV_WORDS))
 #transformation the resume translated from list to string 
@@ -41,44 +45,50 @@ cv_translated_as_a_string = ' '.join(CV_WORDS)
 #testwords= " my name ahmed ima software engineering student at esprit i have also cyber security engineering degree at insant als i have studiest bachelor in electronics"
 
 
-majors_list_from_a_resume=EXTRACT_DATA_FROM_CV.match_majors_by_spacy(cv_translated_as_a_string)
-print(majors_list_from_a_resume)
+# majors_list_from_a_resume=EXTRACT_DATA_FROM_CV.match_majors_by_spacy(cv_translated_as_a_string)
+# print(majors_list_from_a_resume)
 
-degrees_list_from_a_resume=EXTRACT_DATA_FROM_CV.match_degrees_by_spacy(cv_translated_as_a_string)
-print(degrees_list_from_a_resume)
+# degrees_list_from_a_resume=EXTRACT_DATA_FROM_CV.match_degrees_by_spacy(cv_translated_as_a_string)
+# print(degrees_list_from_a_resume)
 
-skills_list_from_a_resume=EXTRACT_DATA_FROM_CV.match_skills_by_spacy(cv_translated_as_a_string)
-print(skills_list_from_a_resume)
+# skills_list_from_a_resume=EXTRACT_DATA_FROM_CV.match_skills_by_spacy(cv_translated_as_a_string)
+# print(skills_list_from_a_resume)
 
-highest_degree=EXTRACT_DATA_FROM_CV.get_minimum_degree(degrees_list_from_a_resume)
-print ("the highest degree of this candidate is", highest_degree )
+
+# skills_list_from_a_job_description=EXTRACT_DATA_FROM_CV.match_skills_by_spacy(cv_jobdescription_as_a_string)
+# degrees_list_from_a_job_description=EXTRACT_DATA_FROM_CV.match_degrees_by_spacy(cv_jobdescription_as_a_string)
+
+# highest_degree=EXTRACT_DATA_FROM_CV.get_maximum_degree(degrees_list_from_a_resume)
+# print ("the highest degree of this candidate is", highest_degree )
+
+# minimum_degree_for_job_description=EXTRACT_DATA_FROM_CV.get_minimum_degree(degrees_list_from_a_job_description)
+# print ("the minimum degree dregree required for the job description is", minimum_degree_for_job_description )
 
 
 
 #translated_job_description=EXTRACT_DATA_FROM_CV.translate_line_by_line('DATA/job-requirements2.txt')
-translated_job_description=EXTRACT_DATA_FROM_CV.translate_line_by_line('DATA/job-requirements2.txt')
+
 #print(translated_job_description)
 
-#transformation the job description translated from list to string 
-cv_jobdescription_as_a_string = ' '.join(translated_job_description)
+
 #print(cv_jobdescription_as_a_string)
 
 ######TEEEEEESSTTTT
-skills_list_from_a_job_description=EXTRACT_DATA_FROM_CV.match_skills_by_spacy(cv_jobdescription_as_a_string)
-degrees_list_from_a_job_description=EXTRACT_DATA_FROM_CV.match_degrees_by_spacy(cv_jobdescription_as_a_string)
+
 #print(cv_jobdescription_as_a_string)
 #print(skills_list_from_a_job_description)
 #print(cv_jobdescription_as_a_string)
 #print(skills_list_from_a_job_description)
 #print(cv_translated_as_a_string)
-print(degrees_list_from_a_resume)
-print(degrees_list_from_a_job_description)
+
+# print(degrees_list_from_a_resume)
+# print(degrees_list_from_a_job_description)
 
 extract_entities_from_resume=EXTRACT_DATA_FROM_CV.extract_entities_from_resume(CV_WORDS)
 print(extract_entities_from_resume)
 
 
-extract_entities_from_job_description=EXTRACT_DATA_FROM_CV.extract_entities_from_resume(translated_job_description)
+extract_entities_from_job_description=EXTRACT_DATA_FROM_CV.extract_entities_from_job_description(cv_jobdescription_as_a_string)
 print(extract_entities_from_job_description)
 
 #print(cv_jobdescription_as_a_string)
