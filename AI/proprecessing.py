@@ -230,6 +230,9 @@ class Processing:
             
             # Populate the dataframe with extracted entities
             extracted_entities_df.loc[0] = [highest_degree, ', '.join(degrees), ', '.join(majors), ', '.join(skills)]
+            # Assuming extracted_entities_df is your dataframe
+            extracted_entities_df.to_csv('extracted_entities_resume.csv', index=False)
+
             
             return extracted_entities_df
         
