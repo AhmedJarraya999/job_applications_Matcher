@@ -184,7 +184,19 @@ class Processing:
             except Exception as e:
                 # Add appropriate error handling/logging here
                 print(f"Error occurred while processing file: {e}")
-                return None          
+                return None    
+            
+        def translate_line_by_line(self, job_requirement):
+            """Translate job offer From frensh to english
+            """
+            JOB_REQUIRMENTS = []
+            # Open the text file
+            with open(job_requirement, 'r') as file:
+            # Iterate through each line in the file
+                for line in file:
+                    JOB_REQUIRMENTS.append(self.translate_from_french_to_english(line))
+            return JOB_REQUIRMENTS
+                
             
         def get_minimum_degree(self, degrees):
          """Get the minimum degree that the candidate has.

@@ -25,6 +25,7 @@
 # print(majors)
 from proprecessing import Processing
 #CLASS
+#job_description_path="DATA/job-job-requirements2.txt"
 majors_patterns_path="/patterns/majors.jsonl"
 degrees_patterns_path="/patterns/degrees.jsonl"
 skills_patterns_path="/patterns/skills.jsonl"
@@ -55,6 +56,22 @@ print ("the highest degree of this candidate is", highest_degree )
 
 extract_entities_from_resume=EXTRACT_DATA_FROM_CV.extract_entities_from_resume(CV_WORDS)
 print(extract_entities_from_resume)
+#translated_job_description=EXTRACT_DATA_FROM_CV.translate_line_by_line('DATA/job-requirements2.txt')
+translated_job_description=EXTRACT_DATA_FROM_CV.translate_line_by_line('DATA/job-requirements2.txt')
+#print(translated_job_description)
+
+#transformation the job description translated from list to string 
+cv_jobdescription_as_a_string = ' '.join(translated_job_description)
+#print(cv_jobdescription_as_a_string)
+
+######TEEEEEESSTTTT
+skills_list_from_a_job_description=EXTRACT_DATA_FROM_CV.match_skills_by_spacy(cv_jobdescription_as_a_string)
+print(cv_jobdescription_as_a_string)
+print(skills_list_from_a_job_description)
+print(cv_jobdescription_as_a_string)
+print(skills_list_from_a_job_description)
+#print(cv_translated_as_a_string)
+####TEEEEEESSSSSSTTT
 
 #print(CV_WORDS2)
 
