@@ -40,10 +40,21 @@ minimum_degree_for_job_description=EXTRACT_DATA_FROM_CV.get_minimum_degree(degre
 print("the minimum degree required for the job description is", minimum_degree_for_job_description)
 
 #SCORE DEGREE CALCULATION
-scoredegree=EXTRACT_DATA_FROM_CV.calculate_degree_match(minimum_degree_for_job_description,highest_degree)
+scoredegree=EXTRACT_DATA_FROM_CV.calculate_degree_score(minimum_degree_for_job_description,highest_degree)
 print("The score based on the extracted degress", scoredegree)
 
 
+##SKILLS FROM RESUMEE EXTRACTION####
+skills_list_from_a_resume=EXTRACT_DATA_FROM_CV.match_skills_by_spacy(cv_translated_as_a_string)
+print("This is a list containing skills extracted from the resume",skills_list_from_a_resume)
+
+##SKILLS FROM JOB DESCRPTION EXTRACTION####
+skills_list_from_a_job_description=EXTRACT_DATA_FROM_CV.match_skills_by_spacy(cv_jobdescription_as_a_string)
+print("This is a list containing skills extracted from the job description", skills_list_from_a_job_description)
+
+#SKILLS DEGREE CALCULATION
+skillsdegree=EXTRACT_DATA_FROM_CV.semantic_skills_similarity_sbert_base_v2(skills_list_from_a_job_description,skills_list_from_a_resume)
+print(skillsdegree)
 
 
 

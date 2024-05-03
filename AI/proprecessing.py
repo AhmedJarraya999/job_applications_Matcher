@@ -5,6 +5,8 @@ import os
 from spacy.lang.en import English
 import pandas as pd
 from resources import DEGREES_IMPORTANCE
+from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
 
 class Processing:
         def __init__(self, majors_patterns_path, degrees_patterns_path, skills_patterns_path):
@@ -232,10 +234,7 @@ class Processing:
     """
          d = {degree: self.degrees_importance[degree] for degree in degrees}
          return min(d, key=d.get)
-        
-        
-    
-        
+          
         def extract_entities_from_resume(self, resume_list):
             """
         Extracts entities such as degrees, majors, and skills from a given resume.
@@ -335,4 +334,31 @@ class Processing:
             else:
                 return 0  # If required degree > candidate degree
             
+        def semantic_skills_similarity_sbert_base_v2(self,job_skills,resume_skills):
+            """
+                Calculate semantic similarity between job skills and resume skills using SBERT all-mpnet-base-v2.
+
+                Parameters:
+                - job_skills (list of str): List of job skills.
+                - resume_skills (list of str): List of resume skills.
+
+                Returns:
+                - float: Semantic similarity score rounded to 3 decimal places.
+
+            """
+            model_path = "sentence_transformer_model"
+            model = SentenceTransformer(model_path)
+            #Encoding:
+            score = 0
+            sen = job_skills+resume_skills
+            sen_embeddings = model.encode(sen)
+            for i in range(len(job_skills)):
+                if job_skills[i] in resume_skills:
+                    score += 1
+                else:
+                    if max(cosine_similarity([sen_embeddings[i]],sen_embeddings[len(job_skills):])[0]) >= 0.4:
+                        score += max(cosine_similarity([sen_embeddings[i]],sen_embeddings[len(job_skills):])[0])
+            score = score/len(job_skills)  
+            return round(score,3)   
+                    
        
