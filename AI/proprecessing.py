@@ -300,17 +300,39 @@ class Processing:
             extracted_entities_job_description_df.to_csv('extracted_entities_jobdescription.csv', index=False)
             return extracted_entities_job_description_df
         
-        # @staticmethod
-        # def assign_degree_match(match_scores):
-        #         """calculate a degree matching score"""
-        #         match_score = 0
-        #         if len(match_scores) != 0:
-        #             if max(match_scores) >= 2:
-        #                 match_score = 0.5
-        #             elif (max(match_scores) >= 0) and (max(match_scores) < 2):
-        #                 match_score = 1
-        #         return match_score
+        def calculate_degree_score(self,job_min_degree, resume_degree):
+            """
+        Calculate a degree matching score based on the difference in degree importance.
+
+        Parameters:
+        - job_min_degree (str): The minimum degree required for the job.
+        - resume_degree (str): The highest degree in the candidate's resume.
+
+        Returns:
+        - float: The degree matching score ranging from 0 to 1.
+          - 1: If the job's minimum degree and the candidate's highest degree are the same.
+          - 0.75: If the required degree is one level lower than the candidate's degree.
+          - 0.5: If the difference is two levels.
+          - 0.25: If the difference is higher than two levels.
+          - 0: If the required degree is higher than the candidate's degree.
+        """
+            job_min_degree_importance = self.degrees_importance.get(job_min_degree, -1)
+            resume_degree_importance = self.degrees_importance.get(resume_degree, -1)
+
+            if job_min_degree_importance == -1 or resume_degree_importance == -1:
+                return None  # Handle invalid degrees
+
+            difference = resume_degree_importance - job_min_degree_importance
+
+            if difference == 0:
+                return 1
+            elif difference == 1:
+                return 0.75
+            elif difference == 2:
+                return 0.5
+            elif difference > 2:
+                return 0.25
+            else:
+                return 0  # If required degree > candidate degree
             
-        # def degree_matching(self,degrees_resume, degrees_job):
-        #   """calculate the final degree matching scores between resumes and job description"""
-        #   job_min_degree = self.degrees_importance[jobs['Minimum degree level'][job_index]]
+       

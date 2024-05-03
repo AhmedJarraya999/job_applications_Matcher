@@ -48,7 +48,7 @@ cv_translated_as_a_string = ' '.join(CV_WORDS)
 # majors_list_from_a_resume=EXTRACT_DATA_FROM_CV.match_majors_by_spacy(cv_translated_as_a_string)
 # print(majors_list_from_a_resume)
 
-# degrees_list_from_a_resume=EXTRACT_DATA_FROM_CV.match_degrees_by_spacy(cv_translated_as_a_string)
+
 # print(degrees_list_from_a_resume)
 
 # skills_list_from_a_resume=EXTRACT_DATA_FROM_CV.match_skills_by_spacy(cv_translated_as_a_string)
@@ -90,6 +90,20 @@ print(extract_entities_from_resume)
 
 extract_entities_from_job_description=EXTRACT_DATA_FROM_CV.extract_entities_from_job_description(cv_jobdescription_as_a_string)
 print(extract_entities_from_job_description)
+
+degrees_list_from_a_resume=EXTRACT_DATA_FROM_CV.match_degrees_by_spacy(cv_translated_as_a_string)
+highest_degree=EXTRACT_DATA_FROM_CV.get_maximum_degree(degrees_list_from_a_resume)
+print(highest_degree)
+
+degrees_list_from_a_job_description=EXTRACT_DATA_FROM_CV.match_degrees_by_spacy(cv_jobdescription_as_a_string)
+minimum_degree_for_job_description=EXTRACT_DATA_FROM_CV.get_minimum_degree(degrees_list_from_a_job_description)
+print(minimum_degree_for_job_description)
+scoredegree=EXTRACT_DATA_FROM_CV.calculate_degree_match(minimum_degree_for_job_description,highest_degree)
+print(scoredegree)
+# print ("the highest degree of this candidate is", highest_degree )
+
+# print ("the minimum degree dregree required for the job description is", minimum_degree_for_job_description )
+
 
 #print(cv_jobdescription_as_a_string)
 ####TEEEEEESSSSSSTTT
