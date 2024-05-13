@@ -426,5 +426,28 @@ class Processing:
                         break  # Break out of the loop once a partial match is found
             
             return score
-                    
+        
+        def calculate_final_score(self,score_degree, score_skills, score_major):
+            """
+            Calculate the final score as a percentage based on three scores.
+
+            Args:
+                score_degree (float): The score for degree, between 0 and 1.
+                score_skills (float): The score for skills, between 0 and 1.
+                score_major (float): The score for major, between 0 and 1.
+
+            Returns:
+                float: The final score as a percentage, rounded to two decimal places.
+            """
+            # Calculate the average of the three scores
+            average_score = (score_degree + score_skills + score_major) / 3
+            
+            # Convert the average score to a percentage
+            final_score_percentage = average_score * 100
+            
+            # Round the final score to two decimal places
+            final_score_percentage = round(final_score_percentage, 2)
+            
+            return final_score_percentage
+                        
        
