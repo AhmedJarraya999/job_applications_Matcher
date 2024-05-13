@@ -360,5 +360,71 @@ class Processing:
                         score += max(cosine_similarity([sen_embeddings[i]],sen_embeddings[len(job_skills):])[0])
             score = score/len(job_skills)  
             return round(score,3)   
+        def get_major_categoryv3(self, major, labels_path_3):
+            """
+            Get major category for a specific major.
+
+            Args:
+                major (str): The major to get the category for.
+                labels_path_3 (dict): A dictionary containing category information.
+
+            Returns:
+                list or None: A list of categories that the major belongs to, if found; otherwise None.
+            """
+            if 'MAJOR' in labels_path_3 and isinstance(labels_path_3['MAJOR'], dict):
+                categories = set()
+                for category, subcategories in labels_path_3['MAJOR'].items():
+                    if major in subcategories:
+                        categories.add(category)
+                return list(categories) if categories else None
+            return None
+
+        def get_major_categoriesv3(self, majors, labels_path):
+            """
+            Get major categories for a list of majors.
+
+            Args:
+                majors (list): A list of majors.
+                labels_path (dict): A dictionary containing category information.
+
+            Returns:
+                list or None: A list of unique major categories if found, otherwise None.
+            """
+            categories = set()
+            for major in majors:
+                category = self.get_major_categoryv3(major, labels_path)
+                if category:
+                    categories.update(category)
+            return list(categories) if categories else None
+        
+        def score_major_match(self, exact_majors_from_job_description, exact_major_category_in_job_description, majors_from_resume, major_categoriesv3_from_resume):
+            """
+            Score the match between majors from a job description and those from a resume.
+
+            Args:
+                exact_majors_from_job_description (list): List of majors extracted from the job description.
+                exact_major_category_in_job_description (str): Exact major category extracted from the job description.
+                majors_from_resume (list): List of majors extracted from the resume.
+                major_categoriesv3_from_resume (list): List of major categories extracted from the resume.
+
+            Returns:
+                float: Score indicating the match between majors from the job description and those from the resume.
+                    1.0 if an exact match is found, 0.5 for partial match, and 0 otherwise.
+            """
+        # Initialize score to 0
+            score = 0
+            
+            # Check if the major extracted from the job description exists in the list of majors from the resume
+            if exact_majors_from_job_description in majors_from_resume:
+                # If it exists, set the score to 1
+                score = 1
+            else:
+                # Check for partial matches
+                for major in major_categoriesv3_from_resume:
+                    if major in exact_major_category_in_job_description:
+                        score = 0.5
+                        break  # Break out of the loop once a partial match is found
+            
+            return score
                     
        
