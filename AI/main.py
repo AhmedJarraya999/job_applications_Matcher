@@ -27,7 +27,7 @@ cv_jobdescription_as_a_string = ' '.join(translated_job_description)
 
 
 ## CONTENT OF A RESUME TRANSLATED FROM FRENCH TO ENGLISH  AS A LIST 
-CV_WORDS = EXTRACT_DATA_FROM_CV.define_type_of_file_and_make_action("Data/1.pdf")
+CV_WORDS = EXTRACT_DATA_FROM_CV.define_type_of_file_and_make_action("Data/ismail.pdf")
 #transformation the resume translated from list to string 
 cv_translated_as_a_string = ' '.join(CV_WORDS)
 
@@ -130,6 +130,8 @@ exact_majors_from_job_description=majors_from_job_description[0]
 print("the exact major  extracted from the job description",exact_majors_from_job_description)
 
 #transformation from list to str  of major categories extracted from the job description
+
+##TO BE UPDATED LATER RETURNS A VALUE OF MAJOR CATEGORY IN THIS RESUME BASED ON THE MOST OCCURENT MAJOR CATEGORY FROM ALL THE MAJORS EXTRACTED   VEEEERRRYYYYYY IMPOOOORTANNNTT
 exact_major_category_in_job_description=major_categoriesv3_from_job_description[0]
 print("the exact major category extracted from the job description",exact_major_category_in_job_description)
 
