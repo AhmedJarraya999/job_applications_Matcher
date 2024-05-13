@@ -1,0 +1,26 @@
+Description de poste :
+
+Nous sommes à la recherche d'un(e) data scientist qualifié(e) pour rejoindre notre équipe et contribuer à nos projets dans le domaine de l'analyse de données et de l'apprentissage automatique. Le candidat idéal devrait posséder une expertise dans l'analyse de données, la modélisation statistique et une solide expérience pratique dans l'application des techniques d'apprentissage automatique pour résoudre des problèmes concrets.
+
+Responsabilités :
+
+Analyser des ensembles de données complexes pour extraire des insights et des tendances significatives.
+Concevoir, développer et mettre en œuvre des modèles prédictifs et des algorithmes d'apprentissage automatique.
+Collaborer avec les équipes interfonctionnelles pour comprendre les besoins commerciaux et identifier les opportunités d'application de l'analyse de données.
+Évaluer et améliorer en permanence les modèles existants en utilisant des techniques de validation croisée et d'optimisation des hyperparamètres.
+Communiquer efficacement les résultats et les recommandations aux parties prenantes techniques et non techniques.
+Compétences :
+
+Maîtrise des langages de programmation tels que Python, R ou Scala.
+Expérience pratique dans l'utilisation de bibliothèques d'analyse de données telles que Pandas, NumPy et SciPy.
+Solide compréhension des techniques d'apprentissage automatique telles que la régression, la classification, le clustering et le traitement du langage naturel.
+Connaissance approfondie des frameworks d'apprentissage automatique tels que TensorFlow, PyTorch ou Scikit-learn.
+Expérience dans la manipulation de bases de données SQL et NoSQL pour l'extraction et le traitement des données.
+Capacité à travailler efficacement dans un environnement agile, en équipe, et à gérer plusieurs tâches simultanément.
+Formation et expérience :
+
+Diplôme universitaire en informatique, statistiques, mathématiques, sciences des données ou domaine connexe.
+Expérience avérée dans l'application de techniques d'analyse de données et d'apprentissage automatique pour résoudre des problèmes réels.
+Formation complémentaire en apprentissage automatique, statistiques ou analyse de données est un plus.
+Excellentes compétences en communication et en collaboration pour travailler en étroite collaboration avec les équipes commerciales et techniques.
+Si vous êtes passionné(e) par l'analyse de données, que vous aimez résoudre des problèmes complexes et que vous souhaitez contribuer à l'évolution de notre entreprise grâce à vos compétences, nous serions ravis de discuter avec vous de cette opportunité passionnante.
