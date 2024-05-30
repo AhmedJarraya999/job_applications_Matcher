@@ -367,13 +367,20 @@ class Processing:
             score = 0
             sen = job_skills+resume_skills
             sen_embeddings = model.encode(sen)
+            # Iterate over each job skill to calculate the similarity score
             for i in range(len(job_skills)):
                 if job_skills[i] in resume_skills:
+                    # If there is an exact match, increment the score by 1
                     score += 1
                 else:
+                    # If there is no exact match, calculate the cosine similarity between the job skill embedding
+            # and all resume skill embeddings
+                    # If the maximum cosine similarity is 0.4 or higher, add this maximum score to the total score
                     if max(cosine_similarity([sen_embeddings[i]],sen_embeddings[len(job_skills):])[0]) >= 0.4:
                         score += max(cosine_similarity([sen_embeddings[i]],sen_embeddings[len(job_skills):])[0])
+            # Normalize the score by dividing it by the number of job skills to get the average match score
             score = score/len(job_skills)  
+             # Return the final score rounded to three decimal places
             return round(score,3)   
         def get_major_categoryv3(self, major, labels_path_3):
             """
@@ -412,7 +419,7 @@ class Processing:
                     categories.update(category)
             return list(categories) if categories else None
         
-        def score_major_match(self, exact_majors_from_job_description, exact_major_category_in_job_description, majors_from_resume, major_categoriesv3_from_resume):
+        def score_major_match_old_way(self, exact_majors_from_job_description, exact_major_category_in_job_description, majors_from_resume, major_categoriesv3_from_resume):
             """
             Score the match between majors from a job description and those from a resume.
 
@@ -440,6 +447,29 @@ class Processing:
                         score = 0.5
                         break  # Break out of the loop once a partial match is found
             
+            return score
+        def score_major_match(self, exact_majors_from_job_description, exact_major_category_in_job_description, majors_from_resume, major_categoriesv3_from_resume):
+            """
+            Score the match between majors from a job description and those from a resume.
+
+            Args:
+                exact_majors_from_job_description (list): List of majors extracted from the job description.
+                exact_major_category_in_job_description (str): Exact major category extracted from the job description.
+                majors_from_resume (list): List of majors extracted from the resume.
+                major_categoriesv3_from_resume (list): List of major categories extracted from the resume.
+
+            Returns:
+                float: Score indicating the match between majors from the job description and those from the resume.
+                    1.0 if an exact match is found,  and 0 otherwise.
+            """
+        # Initialize score to 0
+            score = 0
+            
+            # Check if the major extracted from the job description exists in the list of majors from the resume
+            if exact_majors_from_job_description in majors_from_resume:
+                # If it exists, set the score to 1
+                score = 1
+                
             return score
         
         def calculate_final_score(self,score_degree, score_skills, score_major):
