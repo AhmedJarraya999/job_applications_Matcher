@@ -1,6 +1,6 @@
 Description du poste :
 
-Nous recherchons un ingénieur DevOps qualifié pour rejoindre notre équipe et contribuer à nos projets dans le domaine de la gestion des opérations et du développement. Le candidat idéal devrait posséder une expertise dans divers outils et technologies liés au DevOps, ainsi qu'une expérience pratique dans la mise en œuvre et la gestion de pipelines CI/CD, le déploiement automatisé, et la gestion des infrastructures cloud.
+Nous recherchons un consultant DevOps qualifié pour rejoindre notre équipe et contribuer à nos projets dans le domaine de la gestion des opérations et du développement. Le candidat idéal devrait posséder une expertise dans divers outils et technologies liés au DevOps, ainsi qu'une expérience pratique dans la mise en œuvre et la gestion de pipelines CI/CD, le déploiement automatisé, et la gestion des infrastructures cloud.
 
 Compétences :
 Maîtrise des outils DevOps tels que Jenkins, GitLab CI/CD, Travis CI, ou CircleCI
@@ -10,7 +10,7 @@ Connaissance des outils de surveillance et de journalisation tels que Prometheus
 Expérience avec la gestion des configurations à grande échelle à l'aide d'outils tels que Ansible, Puppet ou Chef
 
 Formation :
-Diplôme d'ingénieur en informatique, ingénierie ou domaine connexe
+ Diplôme  en informatique ou domaine connexe
 Réalisation de cours spécialisés dans les pratiques DevOps et l'automatisation des processus de déploiement
 Formation en gestion des infrastructures cloud et des services associés (AWS, Azure, Google Cloud Platform)
 

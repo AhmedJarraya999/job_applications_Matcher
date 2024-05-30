@@ -72,13 +72,17 @@ class Processing:
             ruler.from_disk(patterns_path)
             # Process some text
             doc1 = nlp(job)
+            # Initialize an empty list to collect unique acceptable majors
             acceptable_majors = []
+            # Iterate over the identified entities in the processed text
             for ent in doc1.ents:
+                # Split the entity label to check if it's a major entity
                 labels_parts = ent.label_.split('|')
+                # If the entity label indicates a major
                 if labels_parts[0] == 'MAJOR':
+                    # Replace hyphens with spaces in the major name and check if it's not already in the list
                     if labels_parts[2].replace('-', ' ') not in acceptable_majors:
-                        acceptable_majors.append(labels_parts[2].replace('-', ' '))
-                    if labels_parts[2].replace('-', ' ') not in acceptable_majors:
+                        # Add the unique major to the list
                         acceptable_majors.append(labels_parts[2].replace('-', ' '))
             return acceptable_majors
         def match_skills_by_spacy(self, job):
@@ -99,15 +103,21 @@ class Processing:
         """
             nlp = English()
             patterns_path = "patterns/skills.jsonl"
+            # Add the EntityRuler to the spaCy pipeline
             ruler = nlp.add_pipe("entity_ruler")
+            # Load entity patterns from the specified JSONL file
             ruler.from_disk(patterns_path)
             # Process some text
             doc1 = nlp(job)
+            # Initialize an empty list to collect unique job skills
             job_skills = []
+            # Iterate over the identified entities in the processed text
             for ent in doc1.ents:
+                # Split the entity label to check if it's a skill entity
                 labels_parts = ent.label_.split('|')
+                # If the entity label indicates a skill
                 if labels_parts[0] == 'SKILL':
-                    #print((ent.text, ent.label_))
+                # Replace hyphens with spaces in the skill name and check if it's not already in the list
                     if labels_parts[1].replace('-', ' ') not in job_skills:
                         job_skills.append(labels_parts[1].replace('-', ' '))
             return job_skills
@@ -135,12 +145,17 @@ class Processing:
             ruler.from_disk(patterns_path)
             # Process some text
             doc1 = nlp(job)
+            # Initialize an empty list to collect unique degree levels
             degree_levels = []
+            # Iterate over the identified entities in the processed text
             for ent in doc1.ents:
+                # Split the entity label to check if it's a degree entity
                 labels_parts = ent.label_.split('|')
+                # If the entity label indicates a degree
                 if labels_parts[0] == 'DEGREE':
-                   # print((ent.text, ent.label_))
+                   # Check if the degree level is not already in the list
                     if labels_parts[1] not in degree_levels:
+                        # Add the unique degree level to the list
                         degree_levels.append(labels_parts[1])
             return degree_levels
 
@@ -449,5 +464,6 @@ class Processing:
             final_score_percentage = round(final_score_percentage, 2)
             
             return final_score_percentage
-                        
+
+                    
        

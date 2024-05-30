@@ -25,6 +25,7 @@
 {"label": "DEGREE|MS-LEVEL", "pattern": [{"LOWER": "m.s"}]}
 {"label": "DEGREE|MS-LEVEL", "pattern": [{"LOWER": "engineering"}]}
 {"label": "DEGREE|MS-LEVEL", "pattern": [{"LOWER": "engineer"}]}
+{"label": "DEGREE|MS-LEVEL", "pattern": [{"LOWER": "consultant"}]}
 {"label": "DEGREE|PHD-LEVEL", "pattern": [{"LOWER": "phd"}]}
 {"label": "DEGREE|PHD-LEVEL", "pattern": [{"LOWER": "ph.d"}]}
 {"label": "DEGREE|PHD-LEVEL", "pattern": [{"LOWER": "doctorate"}]}
