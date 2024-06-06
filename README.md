@@ -1,6 +1,6 @@
 ## Setup Instructions
 
-Before running the project, it's necessary to set up a virtual environment with the required dependencies. Follow the steps below to create the virtual environment and install the necessary libraries:
+Before running the project, it's necessary to set up a virtual environment with the required dependencies. Follow the steps below to create the virtual environment and install the necessary libraries: **Dockefile will be provided soon for easy environment setup**
 
 1.  **Create Virtual Environment:** Open your terminal or command prompt and navigate to the project directory.
 
@@ -46,4 +46,4 @@ Before running the project, it's necessary to set up a virtual environment with 
         - After generating the `.pkl` file, download it.
         - Copy the downloaded `.pkl` file into the project directory.
 
-    s
+6.  **Inside the function: translate_from_french_to_english** - Replace with the path of the downladed .pkl model
