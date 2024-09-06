@@ -1,6 +1,6 @@
 import json
 import os 
-
+from resources import DEGREES_IMPORTANCE
 from proprecessing import Processing
 
 #CLASS
@@ -17,7 +17,7 @@ labels_path_3="/patterns/degrees.jsonl"
 # # Print the current directory
 # print("Current directory:", current_directory)
 
-EXTRACT_DATA_FROM_CV =Processing(majors_patterns_path,degrees_patterns_path,skills_patterns_path)
+EXTRACT_DATA_FROM_CV =Processing(majors_patterns_path,degrees_patterns_path,skills_patterns_path,DEGREES_IMPORTANCE)
 
 
 ## CONTENT OF JOB DESCRIPTION TRANSLATED AS A LIST
