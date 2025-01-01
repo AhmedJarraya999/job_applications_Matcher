@@ -1,6 +1,6 @@
 ![alt text](assets/image.png)
 
-![alt text](image2.png)
+![alt text](assets/image2.pngimage2.png)
 
 ## Project Resume
 
