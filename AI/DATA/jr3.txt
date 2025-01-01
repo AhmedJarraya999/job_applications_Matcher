@@ -1,3 +1,0 @@
-bachelor or master degree in computer science, or related techniques
-+3 years experience in software development
-proficiency in java, or .net , knowledge in cicd with tools like jenkins ,knowledge withn containers concept  docker mastery  and hands on experience on  kubernetes  
