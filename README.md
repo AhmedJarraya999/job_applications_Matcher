@@ -1,3 +1,5 @@
+![alt text](image.png)
+
 ## Setup Instructions
 
 Before running the project, it's necessary to set up a virtual environment with the required dependencies. Follow the steps below to create the virtual environment and install the necessary libraries: **Dockefile will be provided soon for easy environment setup**
