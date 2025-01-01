@@ -12,8 +12,10 @@ Allows uploading and storing files via a Base64-encoded payload.
 2- Resume Analysis Endpoint:
 Analyzes a given resume file and a job description string to: - Translate content as needed. - Extract and compare skills, majors, and degrees.
 -Calculate a compatibility score using semantic similarity and predefined rules.
+
 3- AI and NLP Integration:
 Uses advanced processing techniques, including: - Entity extraction for skills, majors, and degrees. - Semantic similarity using SBERT-based models. - Pattern matching with predefined JSON files.
+
 4- Scoring System:
 Evaluates compatibility based on: - Skill match percentage. - Major alignment. - Degree qualification comparison.
 
