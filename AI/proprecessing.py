@@ -4,9 +4,10 @@ import aspose.words as aw
 import os
 from spacy.lang.en import English
 import pandas as pd
-from resources import DEGREES_IMPORTANCE
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
+# from resources import DEGREES_IMPORTANCE
+DEGREES_IMPORTANCE = {'high school': 0, 'BACCALAUREATE': 1, 'BS-LEVEL': 2, 'MS-LEVEL': 3, 'PHD-LEVEL': 4}
 
 class Processing:
         def __init__(self, majors_patterns_path, degrees_patterns_path, skills_patterns_path):
@@ -19,7 +20,7 @@ class Processing:
         def translate_from_french_to_english(self, cv_words):
             """This method will call pretrained model that translate text from frensh to english
             """
-            with open('model_loading/Translation_From_Frensh_words_to_English.pkl', 'rb') as file:
+            with open('uploaded_files/Translation_From_Frensh_words_to_English.pkl', 'rb') as file:
               MODEL_AI = pickle.load(file)
               TEXT = MODEL_AI(cv_words)
               return TEXT[0]["translation_text"]
@@ -214,6 +215,29 @@ class Processing:
                 for line in file:
                     JOB_REQUIRMENTS.append(self.translate_from_french_to_english(line))
             return JOB_REQUIRMENTS
+        
+        def translate_line_by_linev2(self, job_requirement: str) -> list:
+            """
+            Translate job requirements line by line from French to English.
+
+            Args:
+                job_requirement (str): A string containing job requirements (can include multiple lines).
+
+            Returns:
+                list: A list of translated lines.
+            """
+            JOB_REQUIREMENTS = []
+            
+            # Split the input string into lines
+            lines = job_requirement.splitlines()
+            
+            # Translate each line from French to English
+            for line in lines:
+                translated_line = self.translate_from_french_to_english(line)
+                JOB_REQUIREMENTS.append(translated_line)
+            
+            return JOB_REQUIREMENTS
+
                 
             
         def get_maximum_degree(self, degrees):
@@ -361,7 +385,7 @@ class Processing:
                 - float: Semantic similarity score rounded to 3 decimal places.
 
             """
-            model_path = "sentence_transformer_model"
+            model_path = "sentence-transformers/all-mpnet-base-v2"
             model = SentenceTransformer(model_path)
             #Encoding:
             score = 0
@@ -491,7 +515,9 @@ class Processing:
             final_score_percentage = average_score * 100
             
             # Round the final score to two decimal places
-            final_score_percentage = round(final_score_percentage, 2)
+            # final_score_percentage = round(final_score_percentage, 2)
+            final_score_percentage = f"{round(final_score_percentage, 2)}%"
+
             
             return final_score_percentage
 
