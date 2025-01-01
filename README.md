@@ -1,7 +1,5 @@
 ![alt text](assets/image.png)
 
-![alt text](assets/image2.png)
-
 ## Project Resume
 
 This API leverages FastAPI to process resumes and job descriptions, analyze their content, and calculate a compatibility score based on extracted skills, majors, and degrees. Key functionalities include:
@@ -14,12 +12,18 @@ Analyzes a given resume file and a job description string to: - Translate conten
 -Calculate a compatibility score using semantic similarity and predefined rules.
 
 3- AI and NLP Integration:
-Uses advanced processing techniques, including: - Entity extraction for skills, majors, and degrees. - Semantic similarity using SBERT-based models. - Pattern matching with predefined JSON files.
+Uses advanced processing techniques, including:
+
+- Entity extraction for skills, majors, and degrees.
+- Semantic similarity using SBERT-based models.
+- Pattern matching with predefined JSON files.
 
 4- Scoring System:
 Evaluates compatibility based on: - Skill match percentage. - Major alignment. - Degree qualification comparison.
 
 ==> This project is ideal for streamlining recruitment processes by automating candidate-job compatibility assessment. It demonstrates a robust integration of FastAPI, NLP, and machine learning techniques.
+
+![alt text](assets/image2.png)
 
 ## Setup Instructions
 
